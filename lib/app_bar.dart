@@ -52,9 +52,9 @@ class _ProfileDialogState extends State<ProfileDialog> {
   void initState() {
     super.initState();
     _username =
-        Provider.of<CurrentUser>(context, listen: false).userProfile.username;
+        Provider.of<CurrentUserModel>(context, listen: false).userProfile.username;
     _password =
-        Provider.of<CurrentUser>(context, listen: false).userProfile.password;
+        Provider.of<CurrentUserModel>(context, listen: false).userProfile.password;
   }
 
   @override
@@ -101,7 +101,7 @@ class _ProfileDialogState extends State<ProfileDialog> {
                 Navigator.pop(context);
                 return;
               }
-              Provider.of<CurrentUser>(context, listen: false).userProfile =
+              Provider.of<CurrentUserModel>(context, listen: false).userProfile =
                   UserProfile(_username!, _password!);
               Navigator.pop(context);
             },

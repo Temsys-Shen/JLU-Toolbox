@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:jlu_toolbox/components/test.dart';
 import 'package:provider/provider.dart';
 import 'app_bar.dart';
-import 'models/swiper_pages.dart';
 import 'index/index.dart' as index;
+import 'web_browser/index.dart';
+import 'models/swiper_pages.dart';
 import 'models/user_profile.dart';
+import 'models/shortcuts.dart';
 
 void main() {
   runApp(const AppWithProvider());
@@ -17,13 +19,20 @@ class AppWithProvider extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (ctx) => SwiperPages()),
-          ChangeNotifierProvider(create: (ctx) => CurrentUser())
+          ChangeNotifierProvider(create: (ctx) => SwiperPagesModel()),
+          ChangeNotifierProvider(create: (ctx) => CurrentUserModel()),
+          ChangeNotifierProvider(create: (ctx) => ShortcutsModel())
         ],
         child: MaterialApp(
-          routes: {
-            '/home': (context) => const index.Index(),
-            '/login': (context) => const TestW(),
+          //自定义路由处理
+          onGenerateRoute: (settings) {
+            final uri = Uri.parse(settings.name!);
+            if (uri.scheme == 'http' || uri.scheme == 'https') {
+              debugPrint(settings.name!);
+              return MaterialPageRoute(
+                  builder: (context) => const WebBrowser(), settings: settings);
+            }
+            return null;
           },
           home: const MainApp(),
         ));

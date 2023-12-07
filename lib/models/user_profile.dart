@@ -9,12 +9,12 @@ class UserProfile {
   UserProfile(this.username, this.password);
 }
 
-class CurrentUser with ChangeNotifier {
+class CurrentUserModel with ChangeNotifier {
   final UserProfile _userProfile = UserProfile("", "");
   final _storage = const FlutterSecureStorage();
 
   //实例化时从本地存储中读取用户信息
-  CurrentUser() {
+  CurrentUserModel() {
     (() async {
       final profile = await Future.wait(
           [_storage.read(key: "username"), _storage.read(key: "password")]);
@@ -31,7 +31,7 @@ class CurrentUser with ChangeNotifier {
 
     _userProfile.username = userProfile.username;
     _userProfile.password = userProfile.password;
-    AuthRelated.userProfile = userProfile;
+    AuthRelated().userProfile = userProfile;
     notifyListeners();
   }
 }

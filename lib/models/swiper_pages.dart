@@ -14,7 +14,7 @@ enum AvailableSwiperPages {
   const AvailableSwiperPages(this.label, this.icon, this.page);
 }
 
-class SwiperPages with ChangeNotifier {
+class SwiperPagesModel with ChangeNotifier {
   List<AvailableSwiperPages> _pages = [
     AvailableSwiperPages.qrcode,
     AvailableSwiperPages.test

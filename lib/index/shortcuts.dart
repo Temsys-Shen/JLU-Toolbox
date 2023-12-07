@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:jlu_toolbox/models/shortcuts.dart';
+import 'package:provider/provider.dart';
 // import 'package:provider/provider.dart';
 
 class Shortcuts extends StatelessWidget {
@@ -6,16 +8,10 @@ class Shortcuts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.extent(maxCrossAxisExtent: 120, children: [
-      Shortcut(Icons.school, '吉大官网', () {}),
-      Shortcut(Icons.numbers, '数学学院', () {}),
-      Shortcut(Icons.language, '外国语学院', () {}),
-      Shortcut(Icons.computer, '计算机学院', () {}),
-      Shortcut(Icons.public, '公共外交学院', () {}),
-      Shortcut(Icons.science, '人工智能学院', () {}),
-      Shortcut(Icons.book, '文学院', () {}),
-      Shortcut(Icons.construction, '正在开发', () {}),
-    ]);
+    return Consumer<ShortcutsModel>(builder: (context, model, child) {
+      return GridView.extent(
+          maxCrossAxisExtent: 120, children: model.shortcutsInWidget);
+    });
   }
 }
 

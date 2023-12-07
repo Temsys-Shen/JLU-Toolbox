@@ -14,7 +14,7 @@ class Swiper extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
       child: Container(
           padding: const EdgeInsets.all(20),
-          child: Consumer<SwiperPages>(
+          child: Consumer<SwiperPagesModel>(
             builder: (ctx, pages, child) {
               return swiper_view.Swiper.children(
                   pagination: const swiper_view.SwiperPagination(),

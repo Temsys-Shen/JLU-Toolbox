@@ -8,9 +8,9 @@ class QRCode extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<CurrentUser>(builder: (context, currentUser, child) {
+    return Consumer<CurrentUserModel>(builder: (context, currentUser, child) {
       return FutureBuilder(
-        future: AuthRelated.getQRCode(),
+        future: AuthRelated().getQRCode(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             debugPrint(snapshot.error.toString());
@@ -21,14 +21,13 @@ class QRCode extends StatelessWidget {
             return snapshot.data ?? const Center(child: Text("吉大码获取失败"));
           } else {
             return const Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircularProgressIndicator(),
-                  Text("正在获取吉大码"),
-                ],
-              )
-            );
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircularProgressIndicator(),
+                Text("正在获取吉大码"),
+              ],
+            ));
           }
         },
       );
